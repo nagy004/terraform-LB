@@ -5,17 +5,7 @@ resource "aws_instance" "ec2" {
   subnet_id = var.subnet-id
   vpc_security_group_ids = [var.SG-id]
   key_name = "nagy"
-  # count = length(var.ec2-name)
-  # user_data = <<EOF
-  #   #!/bin/bash
-  #   # Use this for your user data (script from top to bottom)
-  #   # install httpd (Linux 2 version)
-  #   yum update -y
-  #   yum install -y httpd
-  #   systemctl start httpd
-  #   systemctl enable httpd
-  #   echo "<h1>Hello World from ec2 terraform $(hostname -f)</h1>" > /var/www/html/index.html
-  #   EOF
+
 
 
 provisioner "remote-exec" {
@@ -27,12 +17,17 @@ provisioner "remote-exec" {
     timeout = "4m"
   }
 
-  inline = [
-      "sudo apt-get update",
-      "sudo apt-get install -y nginx",
-      # "sudo systemctl start nginx"
+    inline = var.provisioner-proxy
+  #[
+  #     "sudo apt-get update",
+  #     "sudo apt-get install -y nginx",
+  #     "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${module.ALB.alp-dns-private}; \n  } \n}' > default",
+  #     "sudo mv default /etc/nginx/sites-enabled/default",
+  #     "sudo systemctl stop nginx",
+  #     "sudo systemctl start nginx"
+  #     # "sudo systemctl start nginx"
     
-  ]
+  # ]
 }
 
 

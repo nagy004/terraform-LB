@@ -1,10 +1,10 @@
 resource "aws_instance" "ec2" {
   ami           = var.image-type
   instance_type = var.ec2-type
-  associate_public_ip_address = true
+  # associate_public_ip_address = true
   subnet_id = var.subnet-id
   vpc_security_group_ids = [var.SG-id]
-  # key_name = "nagy"
+  key_name = "nagy"
   # count = length(var.ec2-name)
   user_data = <<EOF
     #!/bin/bash

@@ -22,3 +22,7 @@ variable "SG-id" {
     type = string
   
 }
+variable "provisioner-proxy" {
+  type = string
+  
+}
