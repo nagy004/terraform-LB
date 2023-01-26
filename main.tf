@@ -82,10 +82,12 @@ module "ec2-p1" {
     subnet-id = module.subnet-pub-1.subnet-id
     SG-id = module.SG.sg-id
     vpc-id = module.vpc-iti.myvpc-id
+    
+    
     provisioner-proxy=[
       "sudo apt update -y",
       "sudo apt install -y nginx",
-      "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${module.ALB.alp-dns-private}; \n  } \n}' > default",
+      "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${module.private-LB.dns}; \n  } \n}' > default",
       "sudo mv default /etc/nginx/sites-enabled/default",
       "sudo systemctl stop nginx",
       "sudo systemctl start nginx"
@@ -103,10 +105,11 @@ module "ec2-p2" {
     subnet-id = module.subnet-pub-2.subnet-id
     SG-id = module.SG.sg-id
     vpc-id = module.vpc-iti.myvpc-id
+    
     provisioner-proxy=[
       "sudo apt update -y",
       "sudo apt install -y nginx",
-      "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${mo}; \n  } \n}' > default",
+      "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${module.private-LB.dns}; \n  } \n}' > default",
       "sudo mv default /etc/nginx/sites-enabled/default",
       "sudo systemctl stop nginx",
       "sudo systemctl start nginx"
