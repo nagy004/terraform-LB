@@ -18,21 +18,7 @@ resource "aws_instance" "ec2" {
     EOF
 
 
-# provisioner "remote-exec" {
-#   connection {
-#     type        = "ssh"
-#     user        = "ubuntu"
-#     host        = self.public_ip
-#     private_key = file("./nagy.pem")
-#     timeout = "4m"
-#   }
 
-#   inline = [
-#       "sudo apt-get update",
-#       "sudo apt-get install -y nginx",
-#       # "sudo systemctl start nginx"
-    
-#   ]
 # }
 
 

@@ -18,16 +18,7 @@ provisioner "remote-exec" {
   }
 
     inline = var.provisioner-proxy
-  #[
-  #     "sudo apt-get update",
-  #     "sudo apt-get install -y nginx",
-  #     "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  server_name _; \n  location / { \n  proxy_pass http://${module.ALB.alp-dns-private}; \n  } \n}' > default",
-  #     "sudo mv default /etc/nginx/sites-enabled/default",
-  #     "sudo systemctl stop nginx",
-  #     "sudo systemctl start nginx"
-  #     # "sudo systemctl start nginx"
-    
-  # ]
+  
 }
 
 
